@@ -115,7 +115,7 @@ int main(void)
       pOBInit.DATAData = sw_sum;
       HAL_FLASH_Unlock();
       HAL_FLASH_OB_Unlock();
-      HAL_FLASHEx_OBErase();
+      HAL_FLASHEx_OBErase();    // これがないとProgram出来ない．
       HAL_FLASHEx_OBProgram(&pOBInit);
       HAL_FLASH_Lock();
       HAL_FLASH_OB_Lock();
