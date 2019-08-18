@@ -46,7 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+static uint8_t sw_sum;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -67,6 +67,7 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+  int led_flag = 0;
 
   /* USER CODE END 1 */
   
@@ -91,6 +92,8 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim6);
+  sw_sum = HAL_FLASHEx_OBGetUserData(OB_DATA_ADDRESS_DATA0);
 
   /* USER CODE END 2 */
 
@@ -98,6 +101,33 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    if(HAL_GPIO_ReadPin(SW_GPIO_Port, SW_Pin) == GPIO_PIN_RESET && led_flag == 0) {
+      led_flag = 1;
+      HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_SET);
+
+      // sw_sumをインクリメント
+      sw_sum++;
+
+      // eepromにsw_sumを記録
+      FLASH_OBProgramInitTypeDef pOBInit;
+      pOBInit.OptionType = OPTIONBYTE_DATA;
+      pOBInit.DATAAddress = OB_DATA_ADDRESS_DATA0;
+      pOBInit.DATAData = sw_sum;
+      HAL_FLASH_Unlock();
+      HAL_FLASH_OB_Unlock();
+      HAL_FLASHEx_OBErase();
+      HAL_FLASHEx_OBProgram(&pOBInit);
+      HAL_FLASH_Lock();
+      HAL_FLASH_OB_Lock();
+    }
+    else if (HAL_GPIO_ReadPin(SW_GPIO_Port, SW_Pin) == GPIO_PIN_RESET && led_flag == 1) {
+      HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_SET);
+    }
+    else if(HAL_GPIO_ReadPin(SW_GPIO_Port, SW_Pin) == GPIO_PIN_SET && led_flag == 1) {
+      led_flag = 0;
+      HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_RESET);
+    }
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -143,6 +173,17 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+//**************************
+//    タイマ割り込み関数
+//**************************
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  // 5msecタイマ
+  if(htim->Instance == TIM6) {
+    HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
+  }
+}
 
 /* USER CODE END 4 */
 
