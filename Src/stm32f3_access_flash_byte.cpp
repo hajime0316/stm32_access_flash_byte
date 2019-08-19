@@ -10,3 +10,8 @@ Stm32f3AccessFlashByte::Stm32f3AccessFlashByte(int index)
 Stm32f3AccessFlashByte::~Stm32f3AccessFlashByte()
 {
 }
+
+unsigned char Stm32f3AccessFlashByte::get()
+{
+    return data_;
+}
