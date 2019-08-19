@@ -9,6 +9,7 @@ class Stm32f3AccessFlashByte
         int index_;
         unsigned char data_;
         int is_appropriate_index(int);
+        FLASH_OBProgramInitTypeDef OBInit_;
 
     public:
         Stm32f3AccessFlashByte(int);
