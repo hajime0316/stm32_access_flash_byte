@@ -17,7 +17,7 @@ class Stm32f3AccessFlashByte
         void save();
 
     private:
-        int is_appropriate_index(int);
+        int is_index(int);
 };
 
 #endif // STM32F3_ACCESS_FLASH_BYTE_HPP_
