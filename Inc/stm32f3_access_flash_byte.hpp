@@ -8,7 +8,6 @@ class Stm32f3AccessFlashByte
     private:
         int index_;
         unsigned char data_;
-        int is_appropriate_index(int);
         FLASH_OBProgramInitTypeDef OBInit_;
 
     public:
@@ -16,6 +15,9 @@ class Stm32f3AccessFlashByte
         ~Stm32f3AccessFlashByte();
         unsigned char get();
         void save();
+
+    private:
+        int is_appropriate_index(int);
 };
 
 #endif // STM32F3_ACCESS_FLASH_BYTE_HPP_
