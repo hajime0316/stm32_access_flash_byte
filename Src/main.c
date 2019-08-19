@@ -109,10 +109,18 @@ int main(void)
       sw_sum++;
 
       // eepromにsw_sumを記録
+      uint8_t address;
+      uint8_t data;
       FLASH_OBProgramInitTypeDef OBInit;
-      OBInit.OptionType = OPTIONBYTE_DATA;
-      OBInit.DATAAddress = OB_DATA_ADDRESS_DATA0;
-      OBInit.DATAData = sw_sum;
+
+      address = OB_DATA_ADDRESS_DATA0;
+      data = sw_sum;
+
+      HAL_FLASHEx_OBGetConfig(&OBInit);
+      OBInit.OptionType = OPTIONBYTE_DATA | OPTIONBYTE_USER | OPTIONBYTE_DATA;
+      OBInit.DATAAddress = address;
+      OBInit.DATAData = data;
+      
       HAL_FLASH_Unlock();
       HAL_FLASH_OB_Unlock();
       HAL_FLASHEx_OBErase();    // これがないとProgram出来ない．
