@@ -117,8 +117,8 @@ int main(void)
       HAL_FLASH_OB_Unlock();
       HAL_FLASHEx_OBErase();    // これがないとProgram出来ない．
       HAL_FLASHEx_OBProgram(&OBInit);
-      HAL_FLASH_Lock();
       HAL_FLASH_OB_Lock();
+      HAL_FLASH_Lock();
     }
     else if (HAL_GPIO_ReadPin(SW_GPIO_Port, SW_Pin) == GPIO_PIN_RESET && led_flag == 1) {
       HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_SET);
