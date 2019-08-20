@@ -18,5 +18,5 @@ Stm32f3AccessFlashByte::~Stm32f3AccessFlashByte()
 
 unsigned char Stm32f3AccessFlashByte::get()
 {
-    return data_;
+    return OBInit_.DATAData;
 }
