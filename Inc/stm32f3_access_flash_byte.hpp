@@ -14,7 +14,7 @@ class Stm32f3AccessFlashByte
         Stm32f3AccessFlashByte(int);
         ~Stm32f3AccessFlashByte();
         unsigned char get();
-        HAL_StatusTypeDef save(unsigned char);
+        void save(unsigned char);
 
     private:
         int is_index(int);
