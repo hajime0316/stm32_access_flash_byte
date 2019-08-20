@@ -20,3 +20,17 @@ unsigned char Stm32f3AccessFlashByte::get()
 {
     return OBInit_.DATAData;
 }
+
+void Stm32f3AccessFlashByte::save(unsigned char data)
+{
+    OBInit_.DATAData = data;
+
+    HAL_FLASH_Unlock();
+    HAL_FLASH_OB_Unlock();
+    HAL_FLASHEx_OBErase();    // これがないとProgram出来ない．
+    HAL_FLASHEx_OBProgram(&OBInit_);
+    HAL_FLASH_OB_Lock();
+    HAL_FLASH_Lock();
+
+    return;
+}
