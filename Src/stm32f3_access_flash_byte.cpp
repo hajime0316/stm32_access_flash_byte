@@ -2,7 +2,12 @@
 
 Stm32f3AccessFlashByte::Stm32f3AccessFlashByte(int index)
 {
-    index_ = index;
+    assert_param(is_index(index));
+    if (index == 0) OBInit_.DATAAddress = OB_DATA_ADDRESS_DATA0;
+    else OBInit_.DATAAddress = OB_DATA_ADDRESS_DATA1;
+
+    OBInit_.DATAData = HAL_FLASHEx_OBGetUserData(OBInit_.DATAAddress);
+
     HAL_FLASHEx_OBGetConfig(&OBInit_);
     OBInit_.OptionType = OPTIONBYTE_DATA | OPTIONBYTE_USER | OPTIONBYTE_DATA;
 }
