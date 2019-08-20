@@ -6,8 +6,6 @@
 class Stm32f3AccessFlashByte
 {
     private:
-        int index_;
-        unsigned char data_;
         FLASH_OBProgramInitTypeDef OBInit_;
 
     public:
