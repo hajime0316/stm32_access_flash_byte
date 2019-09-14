@@ -5,6 +5,8 @@
 #include "tim.h"
 #include "gpio.h"
 
+#include "stm32_access_flash_byte.hpp"
+
 static uint8_t sw_sum;
 static int led_flag = 0;
 
