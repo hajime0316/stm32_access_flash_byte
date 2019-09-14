@@ -22,7 +22,7 @@ void loop() {
         sw_sum++;
 
         // eepromにsw_sumを記録
-        uint8_t address;
+        uint32_t address;
         uint8_t data;
         FLASH_OBProgramInitTypeDef OBInit;
 
