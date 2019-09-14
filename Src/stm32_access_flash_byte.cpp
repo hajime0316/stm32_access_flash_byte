@@ -1,4 +1,4 @@
-#include "stm32f3_access_flash_byte.hpp"
+#include "stm32_access_flash_byte.hpp"
 
 Stm32AccessFlashByte::Stm32AccessFlashByte(int index)
 {
