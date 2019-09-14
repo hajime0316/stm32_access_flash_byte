@@ -49,3 +49,14 @@ void loop() {
         HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_RESET);
     }
 }
+
+//**************************
+//    タイマ割り込み関数
+//**************************
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  // 5msecタイマ
+  if(htim->Instance == TIM6) {
+    HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
+  }
+}
