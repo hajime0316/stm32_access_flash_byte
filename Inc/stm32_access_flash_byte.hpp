@@ -1,16 +1,16 @@
 #ifndef STM32F3_ACCESS_FLASH_BYTE_HPP_
 #define STM32F3_ACCESS_FLASH_BYTE_HPP_
 
-#include "stm32f3xx_hal.h"
+#include "main.h"
 
-class Stm32f3AccessFlashByte
+class Stm32AccessFlashByte
 {
     private:
         FLASH_OBProgramInitTypeDef OBInit_;
 
     public:
-        Stm32f3AccessFlashByte(int);
-        ~Stm32f3AccessFlashByte();
+        Stm32AccessFlashByte(int);
+        ~Stm32AccessFlashByte();
         unsigned char get();
         void save(unsigned char);
 };

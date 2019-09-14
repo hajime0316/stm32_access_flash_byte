@@ -1,6 +1,6 @@
-#include "stm32f3_access_flash_byte.hpp"
+#include "stm32_access_flash_byte.hpp"
 
-Stm32f3AccessFlashByte::Stm32f3AccessFlashByte(int index)
+Stm32AccessFlashByte::Stm32AccessFlashByte(int index)
 {
     if (index == 0) OBInit_.DATAAddress = OB_DATA_ADDRESS_DATA0;
     else if (index == 1) OBInit_.DATAAddress = OB_DATA_ADDRESS_DATA1;
@@ -12,16 +12,16 @@ Stm32f3AccessFlashByte::Stm32f3AccessFlashByte(int index)
     OBInit_.OptionType = OPTIONBYTE_DATA | OPTIONBYTE_USER | OPTIONBYTE_DATA;
 }
 
-Stm32f3AccessFlashByte::~Stm32f3AccessFlashByte()
+Stm32AccessFlashByte::~Stm32AccessFlashByte()
 {
 }
 
-unsigned char Stm32f3AccessFlashByte::get()
+unsigned char Stm32AccessFlashByte::get()
 {
     return OBInit_.DATAData;
 }
 
-void Stm32f3AccessFlashByte::save(unsigned char data)
+void Stm32AccessFlashByte::save(unsigned char data)
 {
     OBInit_.DATAData = data;
 
