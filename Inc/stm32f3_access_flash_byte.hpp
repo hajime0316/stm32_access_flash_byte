@@ -3,14 +3,14 @@
 
 #include "stm32f3xx_hal.h"
 
-class Stm32f3AccessFlashByte
+class Stm32AccessFlashByte
 {
     private:
         FLASH_OBProgramInitTypeDef OBInit_;
 
     public:
-        Stm32f3AccessFlashByte(int);
-        ~Stm32f3AccessFlashByte();
+        Stm32AccessFlashByte(int);
+        ~Stm32AccessFlashByte();
         unsigned char get();
         void save(unsigned char);
 };
