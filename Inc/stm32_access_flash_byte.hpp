@@ -1,7 +1,7 @@
 #ifndef STM32F3_ACCESS_FLASH_BYTE_HPP_
 #define STM32F3_ACCESS_FLASH_BYTE_HPP_
 
-#include "stm32f3xx_hal.h"
+#include "main.h"
 
 class Stm32AccessFlashByte
 {
