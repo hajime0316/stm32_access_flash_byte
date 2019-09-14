@@ -1,5 +1,4 @@
-Debug/
-Release/
-.vscode/
-.settings/
-*.cfg
+*
+!.gitignore
+!/stm32_access_flash_byte.cpp
+!/stm32_access_flash_byte.hpp
